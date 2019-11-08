@@ -2,7 +2,7 @@
 Solutions to lab sheets of Computer Architecture
 
 TO DO:
-- [ ] Lab 1: Complete magnitude comparator
+- [x] Lab 1
 - [ ] Lab 2: Complete exercise 2 and 3
 - [ ] Lab 3
 - [x] Lab 4
