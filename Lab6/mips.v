@@ -1,32 +1,45 @@
-`include "alu.v"
-`include "regfile.v"
+// helper functions for ALU
 
-module RegFile_32(clk,reset,ReadReg1,ReadReg2,WriteData,WriteReg,RegWrite,ReadData1,ReadData2);
-	input clk,reset,RegWrite;
-	input[1:0] WriteReg,ReadReg1,ReadReg2;
-	output[31:0] WriteData,ReadData1,ReadData2;
-	wire[3:0] DecoderOp,regClk;
-	wire[31:0] q[32];
-	genvar i,j;
-	
-	decoder5_32 d1(DecoderOp,WriteReg);
-	
-	generate for(i=0;i<32;i=i+1)
-	begin: clk_loop
-		and a0(regClk[i],RegWrite,DecoderOp[i],clk);
+module mux2to1(in1,in2,sel,out);
+	input in1,in2,sel;
+	output out;
+
+	assign out = (~sel & in1) | (sel & in2);
+endmodule
+
+module bit32_mux2to1(in1,in2,sel,out);
+	input[31:0] in1,in2;
+	input sel;
+	output[31:0] out;
+	genvar j;
+
+	generate for (j = 0; j < 32; j = j + 1)begin: mux_loop
+		mux2to1 m1(in1[j],in2[j],sel,out[j]);
 	end
 	endgenerate
-	
-	generate for(j=0;j<32;j=j+1)
-	begin: reg_loop
-		reg_32bit r1(q[j],WriteData,DecoderOp[j].);
-	
+endmodule
 
-module IM(PC, register);
-	input [1:0]PC;
-	output [3:0];
-	
-	
+module bit32_mux4to1(in1,in2,in3,in4,sel,out);
+	input[31:0] in1,in2,in3,in4;
+	input[1:0] sel;
+	output[31:0] out;
+	wire[31:0] p1,p2;
 
-module SCDataPath();
-	reg 
+	bit32_mux2to1 m1(in1,in2,sel[0],p1);
+	bit32_mux2to1 m2(in3,in4,sel[0],p2);
+	bit32_mux2to1 m3(p1,p2,sel[1],out);
+endmodule
+
+module bit32AND(in1,in2,out);
+	input[31:0] in1,in2;
+	output[31:0] out;
+
+	assign {out} = in1 & in2;
+endmodule
+
+module bit32OR(in1,in2,out);
+	input[31:0] in1,in2;
+	output[31:0] out;
+
+	assign {out} = in1 | in2;
+endmodule
