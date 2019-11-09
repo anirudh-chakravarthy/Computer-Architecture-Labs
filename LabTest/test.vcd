@@ -1,5 +1,5 @@
 $date
-	Sat Nov  9 21:28:20 2019
+	Sat Nov  9 23:05:26 2019
 $end
 $version
 	Icarus Verilog
@@ -20,11 +20,11 @@ $var wire 1 ' dg $end
 $var wire 1 ( en $end
 $var wire 1 ) reset $end
 $var wire 1 $ s $end
+$var wire 1 * t0 $end
 $var wire 1 % x $end
-$var wire 1 * z $end
-$var wire 1 + t2 $end
-$var wire 1 , t1 $end
-$var wire 1 - t0 $end
+$var wire 1 + z $end
+$var wire 1 , t2 $end
+$var wire 1 - t1 $end
 $var wire 4 . q [3:0] $end
 $var wire 1 " g $end
 $scope module c0 $end
@@ -74,34 +74,34 @@ $var wire 1 B q3 $end
 $var wire 1 C r1 $end
 $var wire 1 D r2 $end
 $var wire 1 $ s $end
+$var wire 1 * t0 $end
 $var wire 1 % x $end
-$var wire 1 * z $end
-$var wire 1 + t2 $end
-$var wire 1 , t1 $end
-$var wire 1 - t0 $end
+$var wire 1 + z $end
+$var wire 1 , t2 $end
+$var wire 1 - t1 $end
 $scope module d0 $end
 $var wire 1 # clk $end
 $var wire 1 8 d $end
-$var wire 1 E reset $end
-$var reg 1 - q $end
+$var wire 1 $ reset $end
+$var reg 1 E q $end
 $upscope $end
 $scope module d1 $end
 $var wire 1 # clk $end
 $var wire 1 9 d $end
-$var wire 1 F reset $end
-$var reg 1 , q $end
+$var wire 1 $ reset $end
+$var reg 1 - q $end
 $upscope $end
 $scope module d2 $end
 $var wire 1 # clk $end
 $var wire 1 : d $end
-$var wire 1 G reset $end
-$var reg 1 + q $end
+$var wire 1 $ reset $end
+$var reg 1 , q $end
 $upscope $end
 $upscope $end
 $scope module df0 $end
 $var wire 1 # clk $end
 $var wire 1 ' d $end
-$var wire 1 H reset $end
+$var wire 1 $ reset $end
 $var reg 1 " q $end
 $upscope $end
 $upscope $end
@@ -109,10 +109,7 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-1H
-1G
-1F
-1E
+xE
 xD
 xC
 xB
@@ -151,10 +148,251 @@ x"
 bx !
 $end
 #500000
+1=
+0+
+0/
+00
+0(
+0:
+09
+04
+0C
+0B
+0D
+0A
+0?
+0'
+03
+05
+06
+b0 !
+b0 .
+b0 1
+07
+0E
+0-
+0,
+0"
+0&
+1#
+#1000000
+08
+0>
+x9
+0<
+x)
+0;
+x@
+0#
+1%
+1$
+#1500000
+14
+b1 !
+b1 .
+b1 1
+13
+x&
+x:
+x(
+xC
+x-
+1#
+#2000000
+0&
+0#
+#2500000
+04
+xD
+03
+b10 !
+b10 .
+b10 1
+15
+x,
+x&
+1#
+#3000000
+0&
+0#
+#3500000
+1/
+14
+b11 !
+b11 .
+b11 1
+13
+x&
+1#
+#4000000
+0&
+0#
+#4500000
+0/
+00
+04
+03
+05
+b100 !
+b100 .
+b100 1
+16
+x&
+1#
+#5000000
+0&
+0#
+#5500000
+14
+b101 !
+b101 .
+b101 1
+13
+x&
+1#
+#6000000
+0&
+0#
+#6500000
+04
+03
+b110 !
+b110 .
+b110 1
+15
+x&
+1#
+#7000000
+0&
+0#
+#7500000
+10
+1/
+14
+b111 !
+b111 .
+b111 1
+13
+x&
+1#
+#8000000
+0&
+0#
+#8500000
+0/
+00
+04
+03
+05
+06
+b1000 !
+b1000 .
+b1000 1
+17
+x&
+1#
+#9000000
+0&
+0#
+#9500000
+14
+b1001 !
+b1001 .
+b1001 1
+13
+x&
+1#
+#10000000
+0&
+0#
+#10500000
+04
+03
+b1010 !
+b1010 .
+b1010 1
+15
+x&
+1#
+#11000000
+0&
+0#
+#11500000
+1/
+14
+b1011 !
+b1011 .
+b1011 1
+13
+x&
+1#
+#12000000
+0&
+0#
+#12500000
+0/
+00
+04
+03
+05
+b1100 !
+b1100 .
+b1100 1
+16
+x&
+1#
+#13000000
+0&
+0#
+#13500000
+14
+b1101 !
+b1101 .
+b1101 1
+13
+x&
+1#
+#14000000
+0&
+0#
+#14500000
+04
+03
+b1110 !
+b1110 .
+b1110 1
+15
+x&
+1#
+#15000000
+0&
+0#
+#15500000
+0D
+x8
+10
+x'
+0=
+x?
+1/
+1+
+14
+b1111 !
+b1111 .
+b1111 1
+13
+x&
+1#
+#16000000
+0&
+0#
+#16500000
+xD
+08
 0'
 1=
 0?
-0*
+0+
 0/
 00
 04
@@ -165,147 +403,45 @@ b0 !
 b0 .
 b0 1
 07
-x&
-1#
-#1000000
-08
-0A
-0B
-0>
-0&
-0<
-x)
-0;
-x@
-0#
-1%
-1$
-#1500000
-09
-14
-0@
-0)
-b1 !
-b1 .
-b1 1
-13
-0"
-0-
-x&
-1#
-#2000000
-0&
-0#
-#2500000
-04
-0C
-b0 !
-b0 .
-b0 1
-03
-0,
-x&
-1#
-#3000000
-0&
-0#
-#3500000
-x&
-1#
-#4000000
-0&
-0#
-#4500000
-x&
-1#
-#5000000
-0&
-0#
-#5500000
-x&
-1#
-#6000000
-0&
-0#
-#6500000
-x&
-1#
-#7000000
-0&
-0#
-#7500000
-x&
-1#
-#8000000
-0&
-0#
-#8500000
-x&
-1#
-#9000000
-0&
-0#
-#9500000
-x&
-1#
-#10000000
-0&
-0#
-#10500000
-x&
-1#
-#11000000
-0&
-0#
-#11500000
-x&
-1#
-#12000000
-0&
-0#
-#12500000
-x&
-1#
-#13000000
-0&
-0#
-#13500000
-x&
-1#
-#14000000
-0&
-0#
-#14500000
-x&
-1#
-#15000000
-0&
-0#
-#15500000
-x&
-1#
-#16000000
-0&
-0#
-#16500000
+xE
+x"
 x&
 1#
 #17000000
 0&
 0#
 #17500000
+14
+b1 !
+b1 .
+b1 1
+13
+0"
+0E
 x&
 1#
 #18000000
 0&
 0#
 #18500000
+04
+03
+b10 !
+b10 .
+b10 1
+15
 x&
 1#
 #19000000
 0&
 0#
 #19500000
+1/
+14
+b11 !
+b11 .
+b11 1
+13
 x&
 1#
 #20000000

@@ -42,6 +42,8 @@ module ControlLogic(s, z, x, clk, t0, t1, t2);
 	output t0, t1, t2;
 	wire da, db, dc; // input to flip-flops
 
+	assign t0 = 1'b1; // WRONG but can't figure out what else to do
+
 	wire nots, notx ,notz;
 	not ns(nots, s);
 	not nx(notx, x);
@@ -52,7 +54,7 @@ module ControlLogic(s, z, x, clk, t0, t1, t2);
 	and a0(p1, t0, nots);
 	and a1(p2, t2, z);
 	or o0(da, p1, p2);
-	d_ff d0(da, clk, 1'b1, t0);
+	d_ff d0(da, clk, s, t0);
 
 	// second d flipflop
 	wire q1, q2, q3;
@@ -60,14 +62,14 @@ module ControlLogic(s, z, x, clk, t0, t1, t2);
 	and a3(q2, t2, notx, notz);
 	and a4(q3, t1, notx);
 	or o1(db, q1, q2, q3);
-	d_ff d1(db, clk, 1'b1, t1);
+	d_ff d1(db, clk, s, t1);
 
 	// third d flipflop
 	wire r1, r2;
 	and a5(r1, t1, x);
 	and a6(r2, t2, notz, x);
 	or o2(dc, r1, r2);
-	d_ff d2(dc, clk, 1'b1, t2);
+	d_ff d2(dc, clk, s, t2);
 endmodule
 
 module intg(s, clk, x, q, g);
@@ -92,7 +94,7 @@ module intg(s, clk, x, q, g);
 	// for dff
 	wire dg;
 	assign dg = z & t2;
-	d_ff df0(dg, clk, 1'b1, g);
+	d_ff df0(dg, clk, s, g);
 endmodule
 	
 /* NOTE: counter Testbench - WORKING */
