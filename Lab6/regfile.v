@@ -21,37 +21,12 @@ module reg_32bit(q, d, clk, reset);
 	endgenerate
 endmodule
 
-module mux4_1(regData, q1, q2, q3, q4, reg_no);
-	input[31:0] q1, q2, q3, q4;
-	input[1:0] reg_no;
-	output[31:0] regData;
-	reg[31:0] regData;
-
-	always @(reg_no or q1 or q2 or q3 or q4) begin
-		if (!reg_no[1]) begin
-			if(!reg_no[0]) begin
-				regData = q1;
-			end
-			else begin
-				regData = q2;
-			end
-		end
-		else begin
-			if(!reg_no[0]) begin
-				regData = q3;
-			end
-			else begin
-				regData = q4;
-			end
-		end
-	end
-endmodule
-
 module mux32_1(regData, q, reg_no);
 	input[31:0][31:0] q;
 	input[4:0] reg_no;
 	output[31:0] regData;
 
+	integer reg_int;
 	assign regData = q[reg_no][31:0];
 endmodule
 
@@ -112,13 +87,13 @@ module RegFile(clk, reset, ReadReg1, ReadReg2, WriteData, WriteReg, RegWrite, Re
 
 	wire[31:0][31:0] q;
 	generate
-		genvar j;
-		for (j = 0; j < 32; j = j + 1) begin
-			reg_32bit r1(q[j][31:0], WriteData, regclk[j], reset);
+		genvar k;
+		for (k = 0; k < 32; k = k + 1) begin
+			reg_32bit r1(q[k][31:0], WriteData, regclk[k], reset);
 		end
 	endgenerate
 
 	// read output from registers
-	mux4_1 m1(ReadData1, q ReadReg1);
-	mux4_1 m2(ReadData2, q, ReadReg2);
+	mux32_1 m1(ReadData1, q, ReadReg1);
+	mux32_1 m2(ReadData2, q, ReadReg2);
 endmodule

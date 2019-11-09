@@ -56,6 +56,7 @@ endmodule
 module SCDataPath(ALU_output, PC, reset, clk);
 	input[4:0] PC;
 	input reset, clk;
+	output[31:0] ALU_output;
 	reg_5bit pc_rf(PC, 32'b0, clk, reset);
 
 	wire[31:0][31:0] instr_mem;
@@ -63,23 +64,46 @@ module SCDataPath(ALU_output, PC, reset, clk);
 
 	// instruction fetch
 	wire[31:0] instruction;
-	read_memory(instr_mem, PC, instruction);
+	read_memory rm0(instr_mem, PC, instruction);
 
 	// generate control signals
 	wire RegDst, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp2;
-	AND_array ar0(RegDst, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp2, instruction[31:27]);
+	wire[5:0] opcode;
+	assign opcode = instruction[31:26];
+	ANDarray ar0(RegDst, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp2, opcode);
 
 	// read from RF
 	wire[31:0] ReadData1, ReadData2;
-	RegFile rf_read(clk, reset, instruction[26:22], instruction[21:17], 0, 0, 0, ReadData1, ReadData2)
+	wire[4:0] ReadReg1, ReadReg2;
+	assign ReadReg1 = instruction[26:22];
+	assign ReadReg2 = instruction[21:17];
+	RegFile rf_read(clk, reset, ReadReg1, ReadReg2, 0, 0, 0, ReadData1, ReadData2);
 
 	// ALU operation
 	wire ALUOp, cout;
 	wire[2:0] Op;
 	assign ALUOp = {ALUOp2, ALUOp1};
-	ALUControl ac0(Op, ALUOp, instruction[5:0])
+	ALUControl ac0(Op, ALUOp, instruction[5:0]);
 	ALU alu0(ReadData1, ReadData2, 0, 0, Op, cout, ALU_output);
 
-	RegFile rf_write(clk, reset, instruction[26:22], instruction[21:17], ALU_output, instruction[16:12], RegWrite, ReadData1, ReadData2);
+	// RF write back
+	wire[4:0] WriteReg;
+	assign WriteReg = instruction[16:12];
+	RegFile rf_write(clk, reset, ReadReg1, ReadReg2, ALU_output, WriteReg, RegWrite, ReadData1, ReadData2);
+endmodule
+
+module TestBench;
+    wire [31:0] ALU_output;
+    reg [31:0] PC;
+    reg reset,clk;
+	SCDataPath SCDP(ALU_output,PC,reset,clk);
+    initial begin
+		$monitor("at time %0d IPC = %d, Reset = %d , CLK = %d , ALU Output = %d",$time,start_pc,rst,clk, ALU_output);
+		#0 clk=0; PC=5; #120 reset = 1;
+		#400 $stop;
+	end
+	always begin
+        #20 clk = ~clk;
+    end
 endmodule
 	
